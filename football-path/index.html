@@ -1,5 +1,5 @@
 ﻿<!doctype html>
-<!-- 封闭版产物：由 tools/build-closed.mjs 生成（源文哈希 06ad4ecb35df），别手改——改源文件再重跑。
+<!-- 封闭版产物：由 tools/build-closed.mjs 生成（源文哈希 146cb38d9c60），别手改——改源文件再重跑。
      并入 16 个源文件 + ui.css；剥掉 140 行模型链路；不装 src/account.js、src/prompt.js。
      0 个网络请求、0 个 key、0 个账号。整局玩法与成书导出都在这 1 个文件里。 -->
 <html lang="zh-CN">
@@ -6510,12 +6510,17 @@ ${rev.length && s().dayLeft > 0 ? `<details class="rvbox"><summary>← 先不往
   async function doShare() {
     const url = location.href.split('#')[0];
     const text = '《足球之路》· 从 1988 写到 2026：分数、伤病、钱由引擎裁决，你只负责写。手机浏览器打开就能玩，不装 App、不收钱。';
+    // 上 1 道 4s 时限：桌面 Chrome 拿不到用户激活时 navigator.share 的 promise 会悬着不 settle，
+    // 不兑掉就是「按了 1 下什公都没生」——分享这东西宁可退成抄链接，不能静默。
     if (navigator.share) {
-      try { await navigator.share({ title: '足球之路', text, url }); toast('发出去了'); return; }
+      try {
+        await Promise.race([navigator.share({ title: '足球之路', text, url }), new Promise((_, rej) => setTimeout(() => rej(new Error('share 没应答')), 4000))]);
+        toast('发出去了'); return;
+      }
       catch (e) { if (e && e.name === 'AbortError') { toast('取消了，没发'); return; } }
     }
     copy(url + ' ' + text);
-    toast('链接连同这句话拄好了，粘给谁都行');
+    toast('链接连同这句话抄好了，粘给谁都行');
   }
   function stageEnd() {
     const e = game.endings(), m = e.metrics;
