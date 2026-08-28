@@ -1,6 +1,6 @@
-﻿<!doctype html>
-<!-- 封闭版产物：由 tools/build-closed.mjs 生成（源文哈希 146cb38d9c60），别手改——改源文件再重跑。
-     并入 16 个源文件 + ui.css；剥掉 140 行模型链路；不装 src/account.js、src/prompt.js。
+<!doctype html>
+<!-- 封闭版产物：由 tools/build-closed.mjs 生成（源文哈希 e4c6ce53b3ac），别手改——改源文件再重跑。
+     并入 18 个源文件 + ui.css；剥掉 140 行模型链路；不装 src/account.js、src/prompt.js。
      0 个网络请求、0 个 key、0 个账号。整局玩法与成书导出都在这 1 个文件里。 -->
 <html lang="zh-CN">
 <head>
@@ -17,22 +17,22 @@
 <meta property="og:description" content="100 点自己分，25 个事件，引擎只裁决不代笔。写到退役那天，你自己导出 1 本回忆录。">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23a63a2b'/%3E%3Ctext x='32' y='46' font-size='40' text-anchor='middle' fill='%23fdf6ea' font-family='serif'%3E%E8%B7%AF%3C/text%3E%3C/svg%3E">
-<title>足球之路 · 从出生到退役（真实生涯改编 + 社交圈 + 叙述权） · 封闭版</title>
+<title>足球之路 · 一本自己写的回忆录</title>
 <style>
-﻿
+/* 銆婅冻鐞冧箣璺€嬧€斺€?绋跨焊涓庣悆鍦恒€? * 瑙嗚锛氱背榛勭绾?+ 澧ㄥ瓧 + 绾㈢瑪鎵规敞锛堢紪杈戠殑鎵嬶級+ 鑽夌豢锛堢悆鍦虹殑閮ㄥ垎锛夈€? * 浜や簰锛氭墜鏈虹浼樺厛锛堝崟鍒?/ 搴曢儴鎿嶄綔鏉?/ 妗ｆ鎶藉眽锛夛紱鈮?80px 鎭㈠鍙屾爮妗岄潰銆? * 鏃犳鏋躲€佹棤澶栭摼瀛椾綋銆傛墍鏈夌被鍚嶄笌 ui.js 鐨勬覆鏌撻挬瀛愪竴涓€瀵瑰簲銆?*/
 :root {
-  --paper: #f6f1e6;      
-  --paper-hi: #fdfaf2;   
+  --paper: #f6f1e6;      /* 绋跨焊搴?*/
+  --paper-hi: #fdfaf2;   /* 鍐呴〉 */
   --ink: #22201c;
   --ink2: #4d463c;
   --mute: #8a8070;
   --line: #ddd2bd;
-  --rule: #e9dfc8;       
-  --red: #a63a2b;        
+  --rule: #e9dfc8;       /* 娴呮牸绾?*/
+  --red: #a63a2b;        /* 绾㈢瑪 */
   --red-deep: #7d281e;
-  --grass: #3e6b47;      
+  --grass: #3e6b47;      /* 鐞冨満鑽?*/
   --grass-hi: #6d955c;
-  --night: #17190f;      
+  --night: #17190f;      /* 澶滃満锛岀敤浜庢诞灞?*/
   --gold: #b98a3e;
   color-scheme: light;
 }
@@ -42,7 +42,7 @@ html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink);
 body {
   font: 16px/1.85 "Songti SC", "STSong", "SimSun", "Source Han Serif SC", serif;
   -webkit-font-smoothing: antialiased;
-  padding-bottom: calc(70px + env(safe-area-inset-bottom)); 
+  padding-bottom: calc(70px + env(safe-area-inset-bottom)); /* 缁欏簳閮ㄦ搷浣滄潯璁╀綅 */
 }
 ::selection { background: var(--rule); }
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
@@ -51,7 +51,7 @@ body {
 
 .wrap { max-width: 1180px; margin: 0 auto; padding: 14px 14px 30px; }
 
-
+/* ---------------- 椤电湁 ---------------- */
 .top {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
   border-bottom: 3px double var(--ink); padding-bottom: 10px;
@@ -65,7 +65,7 @@ body {
 .bt b { display: block; font-size: clamp(20px, 5.6vw, 25px); letter-spacing: 4px; line-height: 1.25; }
 .bt i { display: block; font-style: normal; font-size: 11.5px; letter-spacing: .06em; }
 
-
+/* ---------------- HUD锛氳鍒嗙墝 ---------------- */
 .hud {
   display: flex; gap: 8px; margin-top: 12px; padding-bottom: 4px;
   overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity;
@@ -84,13 +84,13 @@ body {
 }
 .hud .cell.warnrisk { border-top-color: var(--red); background: #f9ece7; }
 
-
+/* ---------------- 涓诲尯 ---------------- */
 main { display: block; }
 @media (min-width: 880px) {
   main { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 22px; align-items: start; }
 }
 
-
+/* 鍗＄墖 = 涓€椤电绾革紱椤朵笂涓€閬撶悆鍦鸿櫄绾?*/
 .card {
   position: relative; background: var(--paper-hi); border: 1px solid var(--line);
   padding: 18px 15px 18px; margin-bottom: 14px; border-radius: 5px;
@@ -116,7 +116,7 @@ main { display: block; }
 }
 .prose p { color: var(--ink2); }
 
-
+/* ---------------- 鎸夐挳 ---------------- */
 button {
   font: inherit; color: var(--ink); background: var(--paper-hi);
   border: 1px solid #c6b99e; border-radius: 4px;
@@ -140,16 +140,16 @@ button.tiny.warn2 { border-color: var(--red-deep); color: var(--red-deep); }
 button.danger { border-color: var(--red-deep); color: var(--red-deep); }
 @media (hover: hover) { button.danger:hover { background: #f7e8e4; } }
 
-
+/* 补写面板：点名补哪一段旧事（引擎早就支持，UI 过去只会自动挑队尾） */
 .rvbox { margin: 12px 0 4px; }
 .rvbox summary { cursor: pointer; color: #6b6152; padding: 6px 2px; }
 @media (hover: hover) { .rvbox summary:hover { color: #3b342b; } }
 .rvlist { margin-top: 8px; }
 
-
+/* 椤电湁涓婄殑鎶藉眽鎸夐挳锛氬彧鍦ㄦ墜鏈虹鍑虹幇 */
 .sheetbtn { display: inline-flex; align-items: center; white-space: nowrap; font-size: 13.5px; padding: 7px 12px; min-height: 40px; }
 
-
+/* ---------------- 閫夐」 keypad锛?鈥? 閿洏鍙寜锛?+ 鎵撳瓧琛ラ€夛級 ---------------- */
 .keypad, .choices { display: flex; flex-direction: column; gap: 8px; margin: 10px 0 6px; }
 .kb {
   width: 100%; text-align: left;
@@ -170,7 +170,7 @@ button.danger { border-color: var(--red-deep); color: var(--red-deep); }
 .gate.ok { color: var(--grass); }
 .gate.no { color: var(--red); }
 
-
+/* 閫夐」韬笂鐨勫皬鏍囩锛堝彧鑳芥墦瀛楅€?/ 瑕佽韩浠?/ 鍐欑湡瀹?/ 鍐欐ā绯?/ 鍏崇郴鎹㈡潵鐨勶級 */
 .tag6 {
   font-style: normal; font-size: 10.5px; padding: 1px 5px; margin-left: 6px;
   border: 1px solid #cfc4ad; border-radius: 2px; color: #6c6152;
@@ -180,10 +180,10 @@ button.danger { border-color: var(--red-deep); color: var(--red-deep); }
 .kb.expo { border-color: #c98a4b; background: #fcf3e6; }
 .kb.blurred { border-color: #93a3b4; background: #f2f5f8; }
 
-
+/* ---------------- 鎵撳瓧妗?---------------- */
 .typebox { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0 4px; }
 .typebox input {
-  flex: 1 1 100%; font: inherit; font-size: 16px; 
+  flex: 1 1 100%; font: inherit; font-size: 16px; /* 鈮?6px锛屽厤寰?iOS 鑱氱劍鏃舵斁澶?*/
   padding: 10px 12px; min-height: 48px; background: #fff;
   border: 1px solid #c6b99e; border-radius: 4px;
 }
@@ -192,7 +192,7 @@ button.danger { border-color: var(--red-deep); color: var(--red-deep); }
 .chips { margin: 8px 0 0; font-size: 12.5px; color: var(--mute); line-height: 2.2; }
 .chips .chip { font-size: 12.5px; padding: 3px 10px; min-height: 34px; margin: 0 4px 4px 0; border-radius: 16px; background: var(--paper); }
 
-
+/* ---------------- 瀵硅瘽璁板綍 ---------------- */
 .talklog { border-top: 1px dashed var(--line); margin-top: 12px; padding-top: 8px; }
 .dlg { margin: 8px 0; padding-left: 10px; border-left: 2px solid var(--rule); }
 .dlg b { color: var(--ink2); }
@@ -208,7 +208,7 @@ button.danger { border-color: var(--red-deep); color: var(--red-deep); }
 .pat i.on { background: var(--red); }
 .pat i.off { background: transparent; border: 1px solid #c6b99e; }
 
-
+/* ---------------- 浜嬪疄鍗?/ 鍙ｅ緞涓夐€?---------------- */
 .facts { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
 .fact {
   background: #fff; border: 1px solid var(--line); border-radius: 4px;
@@ -231,7 +231,7 @@ button.danger { border-color: var(--red-deep); color: var(--red-deep); }
 .fact.omitted .ftx { text-decoration: line-through; color: var(--mute); }
 .backnote { background: #fdf6e8; border: 1px solid #e6d5ae; border-radius: 4px; padding: 8px 12px; margin: 10px 0; font-size: 13px; }
 
-
+/* ---------------- 姝ｆ枃 / 鎴愪功 ---------------- */
 .draft, .book {
   white-space: pre-wrap; font-size: 15px; line-height: 2;
   background: #fff; border: 1px solid var(--line); border-radius: 4px;
@@ -247,13 +247,13 @@ button.danger { border-color: var(--red-deep); color: var(--red-deep); }
 .issues i { color: var(--mute); font-style: normal; }
 .warn { color: var(--red); font-size: 13px; }
 
-
+/* ---------------- 鎺烽鏉?---------------- */
 .roll .bar { display: grid; grid-template-columns: 64px minmax(0, 1fr) 36px; align-items: center; gap: 8px; margin: 8px 0; font-size: 13.5px; }
 .roll .bar span { color: var(--ink2); white-space: nowrap; }
 .roll .bar b { display: block; height: 9px; border-radius: 4px; background: linear-gradient(90deg, var(--grass), var(--grass-hi)); }
 .roll .bar em, .per em { font-style: normal; color: var(--mute); font-variant-numeric: tabular-nums; text-align: right; }
 
-
+/* ---------------- 鎶藉眽閲岀殑渚ф爮锛堟墜鏈猴級/ 鍙屾爮锛堟闈級 ---------------- */
 #side {
   background: var(--paper-hi); border: 1px solid var(--line); border-radius: 5px;
   padding: 12px 13px 16px;
@@ -287,17 +287,17 @@ button.danger { border-color: var(--red-deep); color: var(--red-deep); }
 .cfg textarea { font-size: 14px; }
 .cfg hr { border: 0; border-top: 1px dashed var(--line); margin: 14px 0; }
 
-
+/* ---------------- 搴曢儴鎿嶄綔鏉★紙鎵嬫満鍥哄畾 / 妗岄潰鍥炶惤鎴愪竴琛岋級 ---------------- */
 .dock {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
   background: var(--line); border-top: 1px solid var(--line);
   padding-bottom: env(safe-area-inset-bottom);
 }
 .dock button { border: 0; border-radius: 0; background: var(--paper-hi); min-height: 54px; padding: 6px 2px; font-size: 13.5px; letter-spacing: 2px; }
 .dock button:active { background: var(--rule); transform: none; }
 
-
+/* 閬僵 + 鎶藉眽鍔ㄧ敾鍙湪鎵嬫満绔敓鏁?*/
 #backdrop { display: none; }
 @media (max-width: 879.9px) {
   #side {
@@ -331,7 +331,7 @@ button.danger { border-color: var(--red-deep); color: var(--red-deep); }
   #side { position: sticky; top: 12px; max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); overflow: auto; }
 }
 
-
+/* ---------------- 鎻愮ず娴眰 ---------------- */
 #toast {
   position: fixed; left: 50%; bottom: calc(76px + env(safe-area-inset-bottom));
   transform: translateX(-50%); z-index: 70;
@@ -343,7 +343,7 @@ button.danger { border-color: var(--red-deep); color: var(--red-deep); }
 #toast:not(:empty) { opacity: .96; }
 @media (min-width: 880px) { #toast { bottom: 60px; } }
 
-
+/* ---------------- v3 绀句氦鍦?/ 鍙欒堪鏉?/ 娉曞姟 / 鍚屾椂浠?---------------- */
 .social, .narr, .laws { margin-top: 18px; border-top: 1px dashed #c9bda6; padding-top: 12px; }
 .social h3, .narr h3, .laws h3 { font-size: 14px; margin: 4px 0 10px; letter-spacing: .04em; }
 .social h3 i, .narr h3 i, .laws h3 i { font-style: normal; font-weight: 400; }
@@ -371,7 +371,7 @@ button.danger { border-color: var(--red-deep); color: var(--red-deep); }
 .star .ovr em { font-style: normal; font-weight: 400; color: #6c6152; font-size: 11px; }
 .mot { font-size: 12.5px; padding: 5px 0; border-bottom: 1px dotted #ded4c0; }
 
-
+/* ---------- 鍟嗕笟鍖栵細寮€鏈?/ 鍚堝悓 / 鏀粯 / 璐︽埛 ---------- */
 .editions { margin: 14px 0 6px; border-top: 1px dashed var(--line); padding-top: 12px; }
 .editions h3 { margin: 0 0 8px; font-size: 14px; letter-spacing: .04em; }
 .edrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); gap: 8px; }
@@ -406,7 +406,7 @@ button.danger { border-color: var(--red-deep); color: var(--red-deep); }
 .ent b, .cloudrow b { font-size: 13px; }
 .cloudrow .tiny { margin-left: auto; }
 
-
+/* ---------------- v4锛氬紑灞€閭?100 鐐硅嚜宸卞垎 ---------------- */
 .ptbar { display: flex; align-items: baseline; gap: 8px; margin: 10px 0 6px; padding: 8px 10px; border-radius: 7px; background: #f1ead9; border-left: 3px solid var(--mute); }
 .ptbar b { font-size: 20px; font-variant-numeric: tabular-nums; letter-spacing: .02em; }
 .ptbar i { font-style: normal; font-size: 12px; color: var(--mute); }
@@ -438,18 +438,18 @@ button.danger { border-color: var(--red-deep); color: var(--red-deep); }
 .tag6.no { color: var(--red-deep); border-color: #d9a79c; background: #f9ece8; }
 .tag6.gold { color: #6c4f18; border-color: #dcc48f; background: #f7f1e2; }
 
-
+/* ---------------- v4：建档、机会、被身体挡住的话 ---------------- */
 .gain b, .reg b { font-weight: 700; }
 .old { font-size: 11.5px; opacity: .8; }
 
-
+/* v4.1：建档与口令找回弹窗——拇指点得动，iOS 不放大 */
 .pay label { display: block; margin: 10px 0 0; }
 .pay label input { display: block; width: 100%; min-height: 44px; margin-top: 4px; font-size: 16px; box-sizing: border-box; }
 .pay .btnrow button { min-height: 44px; }
 .pay .paystat { min-height: 28px; line-height: 1.5; }
 
-
-
+/* ---------------- v4.2：导出 ---------------- */
+/* 直接在页面上按 Ctrl+P 也该只出稿子：藏掉工作台，别让人自己挑段落 */
 @media print {
   @page { size: A4; margin: 16mm 15mm; }
   .dock, .top, .hud, #side, #backdrop, #toast, #regmask, .btnrow, .contract,
@@ -460,7 +460,7 @@ button.danger { border-color: var(--red-deep); color: var(--red-deep); }
   .book { white-space: pre-wrap; font-size: 11.5pt; line-height: 1.95; color: #000; }
 }
 
-
+/* ---------------- v4.4：电视台（M2） ---------------- */
 .cfg h3, .cfg h4 { margin: 16px 0 6px; line-height: 1.4; }
 .cfg h4 { font-size: 13px; letter-spacing: .04em; color: #5c5245; border-top: 1px solid #e3d8c2; padding-top: 12px; }
 .cfg h3:first-child { margin-top: 0; }
@@ -469,7 +469,7 @@ button.danger { border-color: var(--red-deep); color: var(--red-deep); }
 a.tiny { text-decoration: none; }
 @media (hover: hover) { .cloudrow a.tiny:hover, .cloudrow a.tiny:focus { background: #efe6d3; } }
 
-
+/* ---- achievements (M5) ---- */
 .achlist .achi{display:flex;gap:9px;align-items:flex-start;padding:6px 4px;border-bottom:1px dashed rgba(0,0,0,.14)}
 .achlist .achi b{flex:0 0 1.7em;text-align:center;font-size:12px;line-height:1.5;border-radius:3px;margin-top:1px}
 .achlist .achi span{flex:1;display:flex;flex-direction:column;gap:2px}
@@ -481,15 +481,15 @@ a.tiny { text-decoration: none; }
 .achlist b.tg{background:#f5ecd0;color:#7c6013}
 .achlist b.th{background:#ece7f6;color:#5c4d86}
 
-
-
+/* ---------------- v4.6：手机自适应与上线（实测 390×844 后补的钉） ---------------- */
+/* 选项上的小标签原先被 2 列网格塞进 32px 的序号列，裁到 2 个字——归位到正文列，允许换行 */
 .kb .tags { grid-column: 2; display: flex; flex-wrap: wrap; gap: 4px 6px; margin-top: 3px; }
 .kb .tags .tag6 { margin-left: 0; white-space: normal; line-height: 1.5; }
 .kb > .tag6 { grid-column: 2; }
-
+/* 勾选框：别被 .cfg input 的 width:100% 拉成 1 条 13px 高的横杠 */
 .cfg input[type=checkbox] { width: 22px; height: 22px; padding: 0; margin: 1px 0 0; flex: none; accent-color: #8a6a3a; }
 .cfg label:has(> input[type=checkbox]) { flex-direction: row; align-items: flex-start; gap: 9px; }
-
+/* 弹窗在矮屏上得能滻，别把「确认」顶出屏幕 */
 .pay { max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); overflow: auto; }
 #side { overscroll-behavior: contain; }
 @media (max-width: 879.9px) {
@@ -502,7 +502,7 @@ a.tiny { text-decoration: none; }
 @media (min-width: 880px) {
   .prose, .book, .draft { max-width: 44em; }
 }
-
+/* 320 档（iPhone SE / 老安卓）：实测 100 点那排会撑出 12px 横滚，这里把加减钮与预览列收窄 */
 @media (max-width: 360px) {
   .prow { grid-template-columns: minmax(52px, 1fr) auto 44px; gap: 6px; }
   .stp { width: 40px; height: 40px; font-size: 18px; }
@@ -517,6 +517,51 @@ a.tiny { text-decoration: none; }
   .book { max-height: calc(100vh - 150px); max-height: calc(100dvh - 150px); }
 }
 
+/* ---------------- v4.7: solid panels (drawer / dock) + header credit + open counter ---------------- */
+/* header credit line + per-device open counter chip */
+.credit { font-style: normal; font-size: 11px; letter-spacing: .16em; color: var(--mute); }
+.topr { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.opens {
+  font-size: 11px; line-height: 1.7; color: var(--ink2); background: var(--paper-hi);
+  border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; white-space: nowrap;
+}
+.opens[hidden] { display: none; }
+
+/* the drawer must never be translucent over the prose: solid sheet, solid rows */
+#side { background: var(--paper-hi); }
+#side .tabs button { background: var(--paper); }
+#side .ch, #side .per, #side .achi, #side .card { background: var(--paper); }
+
+@media (max-width: 879.9px) {
+  #side { border-top: 3px solid var(--ink); box-shadow: 0 -18px 44px rgba(23, 19, 8, .38); }
+  .dock { border-top: 2px solid var(--ink); box-shadow: 0 -8px 22px rgba(23, 19, 8, .18); }
+}
+@media (min-width: 880px) {
+  .dock {
+    max-width: 1180px; margin: 26px auto 30px; padding: 10px 12px; gap: 8px; justify-content: center;
+    background: var(--paper-hi); border: 1px solid var(--line); border-radius: 8px;
+  }
+  .dock button { background: var(--paper); }
+}
+
+/* ---------------- v4.7b: end-of-career poster overlay ---------------- */
+/* the picture must be viewable whole and the buttons must stay reachable on a short screen */
+.pmask {
+  position: fixed; inset: 0; z-index: 95; background: var(--night);
+  display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 14px;
+  overscroll-behavior: contain;
+}
+.pmask .pv { flex: 1 1 auto; min-height: 0; width: 100%; display: flex; justify-content: center; }
+.pmask .pv img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; background: var(--paper); }
+.pmask .pb { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.pmask .ph { margin: 0; color: #9a9384; font-size: 12.5px; line-height: 1.6; text-align: center; }
+#toast { z-index: 120; }
+@media (max-height: 520px) and (orientation: landscape) {
+  .pmask { flex-wrap: wrap; align-content: center; }
+  .pmask .pv { flex: 0 0 100%; order: -1; }
+  .pmask .pv img { max-height: 56vh; max-height: 56dvh; width: auto; }
+}
+
 </style>
 </head>
 <body>
@@ -524,9 +569,9 @@ a.tiny { text-decoration: none; }
   <header class="top">
     <div class="brand">
       <span class="seal" aria-hidden="true">路</span>
-      <div class="bt"><b>足球之路</b><i class="mut">1988 → 2026 · 封闭版：无网络、无模型、无账号</i></div>
+      <div class="bt"><b>足球之路</b><i class="mut">1988 → 2026 · 一本自己写的回忆录</i><i class="credit">出自 Rainbox AI 白川</i></div>
     </div>
-    <button id="btn-sheet" class="sheetbtn" aria-label="打开随行档案">档案 ☰</button>
+    <div class="topr"><span id="opens" class="opens" hidden title="只数这台设备打开过几次"></span><button id="btn-sheet" class="sheetbtn" aria-label="打开随行档案">档案 ☰</button></div>
   </header>
   <div id="hud" class="hud" aria-label="生涯状态"></div>
   <main>
@@ -538,7 +583,6 @@ a.tiny { text-decoration: none; }
   <button id="d-save">存档</button>
   <button id="d-load">读档</button>
   <button id="d-book">成书</button>
-  <button id="d-json">账本</button>
   <button id="d-reset">重开</button>
 </nav>
 <div id="backdrop" aria-hidden="true"></div>
@@ -5221,6 +5265,605 @@ a.tiny { text-decoration: none; }
 
   </script>
   <script>
+/* ——— qr.js ——— */
+/* 二维码编码器（游戏内「通关海报」把线上地址画进 canvas 用）。
+ *
+ * 只留这 1 件事需要的部分：byte 模式（UTF-8 字节，中文直接编）+ 里德-所罗门纠错
+ * + L/M/Q/H 四档 + 版本 1~10 + 8 种掩码取惩罚分最小。版本 10 装不下就抛错，不静默画半张。
+ *
+ * 来源声明：规则按 ISO/IEC 18004 自己写了 1 份精简版，表数据与流程逐步对齐 node-qrcode
+ * —— node-qrcode is MIT licensed, Copyright (c) 2012 Ryan Day; QRCode for JavaScript is
+ * MIT licensed, Copyright (c) 2009 Kazuhiko Arase（见 node_modules/qrcode/LICENSE，
+ * 该目录是临时装的可选依赖，随时可以删；本文件不读它、也不引任何 npm 包）。
+ * 相对原实现删掉了：数字/字母分段的 Dijkstra 优化、Kanji+SJIS、版本 11~40、
+ * canvas/png/terminal 渲染器。相对原实现加了：超长时报错、SVG 输出走 MR 全局。
+ * 浏览器与 node 共用 1 份代码，所以写成挂在 globalThis.MR 上的脚本。
+ */
+(function () {
+  const MR = globalThis.MR || (globalThis.MR = {});
+
+  const MAX_V = 10;              // 超过版本 10 一律放弃（海报上那张图不需要更大的矩阵）
+  const ECLS = 'LMQH';
+  const ECL_BIT = [1, 0, 3, 2];  // 格式信息里的 2 bit 纠错标记
+  const TOTALS = [0, 26, 44, 70, 100, 134, 172, 196, 242, 292, 346]; // 各版本总码字（数据+纠错）
+  // 下面两张表：行 = 版本 1~10，列 = L M Q H
+  const BLOCKS = [
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 2, 4, 1, 2, 4, 4,
+    2, 4, 4, 4, 2, 4, 6, 5, 2, 4, 6, 6, 2, 5, 8, 8, 4, 5, 8, 8,
+  ];
+  const ECW = [
+    7, 10, 13, 17, 10, 16, 22, 28, 15, 26, 36, 44, 20, 36, 52, 64, 26, 48, 72, 88,
+    36, 64, 96, 112, 40, 72, 108, 130, 48, 88, 132, 156, 60, 110, 160, 192, 72, 130, 192, 224,
+  ];
+
+  const sizeOf = (v) => v * 4 + 17;
+  const ccBits = (v) => (v < 10 ? 8 : 16);                       // byte 模式的长度字段位宽
+  const dataWords = (v, i) => TOTALS[v] - ECW[(v - 1) * 4 + i];  // 数据码字数
+  const byteCap = (v, i) => Math.floor((dataWords(v, i) * 8 - 4 - ccBits(v)) / 8);
+
+  function eclIdx(e) {
+    if (e === undefined || e === null) return 1; // 默认 M
+    const i = ECLS.indexOf(String(e).toUpperCase());
+    if (i < 0) throw new Error('qr: bad ecl');
+    return i;
+  }
+
+  function pickVersion(len, i) {
+    for (let v = 1; v <= MAX_V; v++) if (len <= byteCap(v, i)) return v;
+    throw new Error('qr: too long');
+  }
+
+  // ---------- GF(256)，本原多项式 0x11d ----------
+  const EXP = new Uint8Array(512);
+  const LOG = new Uint8Array(256);
+  (function () {
+    let x = 1;
+    for (let i = 0; i < 255; i++) {
+      EXP[i] = x; LOG[x] = i;
+      x <<= 1;
+      if (x & 0x100) x ^= 0x11d;
+    }
+    for (let i = 255; i < 512; i++) EXP[i] = EXP[i - 255]; // 免取模的乘法查表
+  })();
+  const gmul = (a, b) => (a === 0 || b === 0 ? 0 : EXP[LOG[a] + LOG[b]]);
+
+  const GEN = {};
+  // 生成多项式 = ∏ (x - α^i)，存系数数组（首项系数 1 在最前）
+  function genPoly(deg) {
+    if (GEN[deg]) return GEN[deg];
+    let p = [1];
+    for (let i = 0; i < deg; i++) {
+      const q = new Array(p.length + 1);
+      for (let k = 0; k < q.length; k++) q[k] = 0;
+      for (let j = 0; j < p.length; j++) {
+        q[j] ^= p[j];
+        q[j + 1] ^= gmul(p[j], EXP[i]);
+      }
+      p = q;
+    }
+    GEN[deg] = p;
+    return p;
+  }
+
+  // 纠错码字 = data·x^deg 对生成多项式取余
+  function ecOf(data, deg) {
+    const gen = genPoly(deg);
+    const buf = new Uint8Array(data.length + deg);
+    buf.set(data);
+    for (let i = 0; i < data.length; i++) {
+      const c = buf[i];
+      if (!c) continue;
+      for (let j = 0; j < gen.length; j++) buf[i + j] ^= gmul(gen[j], c);
+    }
+    return buf.subarray(data.length);
+  }
+
+  // ---------- 位流：模式 0100 + 长度 + 数据 + 终止符 + 0xEC/0x11 交替补齐 ----------
+  function codewords(bytes, v, i) {
+    const cap = dataWords(v, i) * 8;
+    const bits = new Uint8Array(cap);
+    let n = 0;
+    const put = (val, len) => {
+      for (let k = len - 1; k >= 0; k--) bits[n++] = (val >>> k) & 1;
+    };
+    put(4, 4);                       // byte 模式
+    put(bytes.length, ccBits(v));
+    for (let k = 0; k < bytes.length; k++) put(bytes[k], 8);
+    if (n + 4 <= cap) put(0, 4);     // 终止符：最多 4 个 0，够放才放
+    while (n % 8) put(0, 1);         // 补齐到整字节
+    const out = new Uint8Array(cap / 8);
+    for (let k = 0; k < n; k++) if (bits[k]) out[k >> 3] |= 0x80 >>> (k & 7);
+    // 补齐字节从第 1 个垫字节起算奇偶：0xEC、0x11 交替
+    for (let k = n / 8, pad = 0, end = out.length; k < end; k++, pad++) out[k] = pad % 2 ? 0x11 : 0xec;
+    return out;
+  }
+
+  // ---------- 分块 + 交织 ----------
+  function interleave(data, v, i) {
+    const total = TOTALS[v];
+    const blocks = BLOCKS[(v - 1) * 4 + i];
+    const dataTotal = total - ECW[(v - 1) * 4 + i];
+    const g2 = total % blocks;
+    const g1 = blocks - g2;
+    const d1 = Math.floor(dataTotal / blocks);
+    const ecLen = Math.floor(total / blocks) - d1;
+
+    const dc = [];
+    const ec = [];
+    let maxData = 0;
+    let off = 0;
+    for (let b = 0; b < blocks; b++) {
+      const len = b < g1 ? d1 : d1 + 1;
+      const chunk = data.subarray(off, off + len);
+      off += len;
+      if (len > maxData) maxData = len;
+      dc.push(chunk);
+      ec.push(ecOf(chunk, ecLen));
+    }
+    const out = new Uint8Array(total);
+    let p = 0;
+    for (let k = 0; k < maxData; k++) {
+      for (let b = 0; b < blocks; b++) if (k < dc[b].length) out[p++] = dc[b][k];
+    }
+    for (let k = 0; k < ecLen; k++) {
+      for (let b = 0; b < blocks; b++) out[p++] = ec[b][k];
+    }
+    return out;
+  }
+
+  // ---------- 模块矩阵：d = 深色位，r = 功能图形（不参与掩码、不参与数据摆放）----------
+  function M(size) {
+    this.size = size;
+    this.d = new Uint8Array(size * size);
+    this.r = new Uint8Array(size * size);
+  }
+  M.prototype.set = function (row, col, v, res) {
+    const k = row * this.size + col;
+    this.d[k] = v ? 1 : 0;
+    if (res) this.r[k] = 1;
+  };
+  M.prototype.get = function (row, col) { return this.d[row * this.size + col]; };
+  M.prototype.reserved = function (row, col) { return this.r[row * this.size + col]; };
+
+  function setupFinder(m) {
+    const size = m.size;
+    const pos = [[0, 0], [0, size - 7], [size - 7, 0]];
+    for (let i = 0; i < pos.length; i++) {
+      const row = pos[i][0];
+      const col = pos[i][1];
+      for (let r = -1; r <= 7; r++) {
+        if (row + r <= -1 || size <= row + r) continue;
+        for (let c = -1; c <= 7; c++) {
+          if (col + c <= -1 || size <= col + c) continue;
+          const dark = (r >= 0 && r <= 6 && (c === 0 || c === 6)) ||
+            (c >= 0 && c <= 6 && (r === 0 || r === 6)) ||
+            (r >= 2 && r <= 4 && c >= 2 && c <= 4);
+          m.set(row + r, col + c, dark, true);
+        }
+      }
+    }
+  }
+
+  function setupTiming(m) {
+    const size = m.size;
+    for (let r = 8; r < size - 8; r++) {
+      m.set(r, 6, r % 2 === 0, true);
+      m.set(6, r, r % 2 === 0, true);
+    }
+  }
+
+  // 定位图形中心坐标：对称分布在对角线上，去掉被探测图形占住的 3 个角
+  function alignCoords(v) {
+    if (v === 1) return [];
+    const n = Math.floor(v / 7) + 2;
+    const size = sizeOf(v);
+    const step = Math.ceil((size - 13) / (2 * n - 2)) * 2;
+    const p = [size - 7];
+    for (let i = 1; i < n - 1; i++) p[i] = p[i - 1] - step;
+    p.push(6);
+    return p.reverse();
+  }
+
+  function setupAlign(m, v) {
+    const pos = alignCoords(v);
+    const n = pos.length;
+    for (let i = 0; i < n; i++) {
+      for (let j = 0; j < n; j++) {
+        if ((i === 0 && j === 0) || (i === 0 && j === n - 1) || (i === n - 1 && j === 0)) continue;
+        for (let r = -2; r <= 2; r++) {
+          for (let c = -2; c <= 2; c++) {
+            m.set(pos[i] + r, pos[j] + c, r === -2 || r === 2 || c === -2 || c === 2 || (r === 0 && c === 0), true);
+          }
+        }
+      }
+    }
+  }
+
+  function bchDigit(x) {
+    let n = 0;
+    while (x) { n++; x >>>= 1; }
+    return n;
+  }
+  const G15 = 0x537, G15X = 0x5412, G18 = 0x1f25;
+
+  function setupFormat(m, i, mask) {
+    const size = m.size;
+    const data = (ECL_BIT[i] << 3) | mask;
+    let d = data << 10;
+    while (bchDigit(d) - bchDigit(G15) >= 0) d ^= G15 << (bchDigit(d) - bchDigit(G15));
+    const bits = ((data << 10) | d) ^ G15X;
+    for (let k = 0; k < 15; k++) {
+      const mod = ((bits >> k) & 1) === 1;
+      if (k < 6) m.set(k, 8, mod, true);
+      else if (k < 8) m.set(k + 1, 8, mod, true);
+      else m.set(size - 15 + k, 8, mod, true);
+      if (k < 8) m.set(8, size - k - 1, mod, true);
+      else if (k < 9) m.set(8, 15 - k - 1 + 1, mod, true);
+      else m.set(8, 15 - k - 1, mod, true);
+    }
+    m.set(size - 8, 8, 1, true); // 固定的黑模块
+  }
+
+  function setupVersion(m, v) {
+    const size = m.size;
+    let d = v << 12;
+    while (bchDigit(d) - bchDigit(G18) >= 0) d ^= G18 << (bchDigit(d) - bchDigit(G18));
+    const bits = (v << 12) | d;
+    for (let k = 0; k < 18; k++) {
+      const row = Math.floor(k / 3);
+      const col = k % 3 + size - 11;
+      const mod = ((bits >> k) & 1) === 1;
+      m.set(row, col, mod, true);
+      m.set(col, row, mod, true);
+    }
+  }
+
+  // 数据码字按「右起两列一组、上下往返、第 6 列整体跳过」摆进矩阵
+  function setupData(m, cw) {
+    const size = m.size;
+    let inc = -1;
+    let row = size - 1;
+    let bit = 7;
+    let byte = 0;
+    for (let col = size - 1; col > 0; col -= 2) {
+      if (col === 6) col--;
+      for (;;) {
+        for (let c = 0; c < 2; c++) {
+          if (!m.reserved(row, col - c)) {
+            let dark = false;
+            if (byte < cw.length) dark = ((cw[byte] >>> bit) & 1) === 1;
+            m.set(row, col - c, dark);
+            bit--;
+            if (bit === -1) { byte++; bit = 7; }
+          }
+        }
+        row += inc;
+        if (row < 0 || size <= row) { row -= inc; inc = -inc; break; }
+      }
+    }
+  }
+
+  function maskAt(p, i, j) {
+    switch (p) {
+      case 0: return (i + j) % 2 === 0;
+      case 1: return i % 2 === 0;
+      case 2: return j % 3 === 0;
+      case 3: return (i + j) % 3 === 0;
+      case 4: return (Math.floor(i / 2) + Math.floor(j / 3)) % 2 === 0;
+      case 5: return (i * j) % 2 + (i * j) % 3 === 0;
+      case 6: return ((i * j) % 2 + (i * j) % 3) % 2 === 0;
+      case 7: return ((i * j) % 3 + (i + j) % 2) % 2 === 0;
+      default: throw new Error('qr: bad mask');
+    }
+  }
+
+  function applyMask(m, p) {
+    const size = m.size;
+    for (let col = 0; col < size; col++) {
+      for (let row = 0; row < size; row++) {
+        if (m.reserved(row, col)) continue;
+        if (maskAt(p, row, col)) {
+          const k = row * size + col;
+          m.d[k] ^= 1;
+        }
+      }
+    }
+  }
+
+  // 惩罚分：4 条规则（连续同色 3+、2x2 同色块 3+、1:1:3:1:1 图形 40+、深色占比偏离 50% 10+）
+  function penalty(m) {
+    const size = m.size;
+    let p = 0;
+    let dark = 0;
+
+    // N1：行、列上连续 5 个以上同色，每多 1 个再加 1 分
+    for (let row = 0; row < size; row++) {
+      let runC = 0, runR = 0, lastC = -1, lastR = -1;
+      for (let col = 0; col < size; col++) {
+        const vc = m.get(row, col);
+        const vr = m.get(col, row);
+        dark += vc;
+        if (vc === lastC) runC++;
+        else { if (runC >= 5) p += 3 + (runC - 5); lastC = vc; runC = 1; }
+        if (vr === lastR) runR++;
+        else { if (runR >= 5) p += 3 + (runR - 5); lastR = vr; runR = 1; }
+      }
+      if (runC >= 5) p += 3 + (runC - 5);
+      if (runR >= 5) p += 3 + (runR - 5);
+    }
+
+    // N2：2x2 同色块
+    for (let row = 0; row < size - 1; row++) {
+      for (let col = 0; col < size - 1; col++) {
+        const s = m.get(row, col) + m.get(row, col + 1) + m.get(row + 1, col) + m.get(row + 1, col + 1);
+        if (s === 4 || s === 0) p += 3;
+      }
+    }
+
+    // N3：行列里出现 黑白白黑黑白黑白黑（前后再留 4 个白）那 1:1:3:1:1 形状，滑窗 11 位
+    for (let row = 0; row < size; row++) {
+      let bitsCol = 0, bitsRow = 0;
+      for (let col = 0; col < size; col++) {
+        bitsCol = ((bitsCol << 1) & 0x7ff) | m.get(row, col);
+        if (col >= 10 && (bitsCol === 0x5d0 || bitsCol === 0x05d)) p += 40;
+        bitsRow = ((bitsRow << 1) & 0x7ff) | m.get(col, row);
+        if (col >= 10 && (bitsRow === 0x5d0 || bitsRow === 0x05d)) p += 40;
+      }
+    }
+
+    // N4：深色比例偏离 50%，每偏 5% 扣 10 分
+    const k = Math.abs(Math.ceil((dark * 100 / (size * size)) / 5) - 10);
+    return p + k * 10;
+  }
+
+  function encode(bytes, v, i) {
+    const cw = interleave(codewords(bytes, v, i), v, i);
+    const m = new M(sizeOf(v));
+    setupFinder(m);
+    setupTiming(m);
+    setupAlign(m, v);
+    setupFormat(m, i, 0); // 先占位，免得数据/掩码碰到格式区
+    if (v >= 7) setupVersion(m, v);
+    setupData(m, cw);
+    let best = 0;
+    let low = Infinity;
+    for (let p = 0; p < 8; p++) {
+      setupFormat(m, i, p);
+      applyMask(m, p);
+      const s = penalty(m);
+      applyMask(m, p); // 异或自反，再来 1 遍就是撤销
+      if (s < low) { low = s; best = p; }
+    }
+    applyMask(m, best);
+    setupFormat(m, i, best);
+    return m;
+  }
+
+  /** 文本 → 二维码矩阵。opt: { ecl:'L'|'M'|'Q'|'H'（默认 M）, version:1~10（默认自动选最小可容纳的）} */
+  MR.qrMatrix = function (text, opt) {
+    const o = opt || {};
+    if (text === undefined || text === null) throw new Error('qr: empty text');
+    const i = eclIdx(o.ecl);
+    const bytes = new TextEncoder().encode(String(text));
+    if (!bytes.length) throw new Error('qr: empty text');
+    let v;
+    if (o.version === undefined || o.version === null) {
+      v = pickVersion(bytes.length, i);
+    } else {
+      v = Number(o.version) | 0;
+      if (!(v >= 1 && v <= MAX_V)) throw new Error('qr: bad version');
+      if (bytes.length > byteCap(v, i)) throw new Error('qr: too long');
+    }
+    const m = encode(bytes, v, i);
+    const modules = [];
+    for (let y = 0; y < m.size; y++) {
+      const row = new Array(m.size);
+      for (let x = 0; x < m.size; x++) row[x] = m.d[y * m.size + x] === 1;
+      modules.push(row);
+    }
+    return { size: m.size, modules: modules };
+  };
+
+  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+  /** 文本 → 可直接塞进 img/canvas 的 SVG 字符串（不引任何外部资源）。opt 再加 cell/margin/dark/light/title */
+  MR.qrSvg = function (text, opt) {
+    const o = opt || {};
+    const q = MR.qrMatrix(text, o);
+    let cell = Number(o.cell);
+    if (!isFinite(cell) || cell <= 0) cell = 4;
+    let margin = 4;
+    if (o.margin !== undefined && o.margin !== null) {
+      const g = Math.floor(Number(o.margin));
+      margin = isFinite(g) ? Math.max(0, g) : 4;
+    }
+    const dark = esc(o.dark === undefined || o.dark === null ? '#22201cff' : o.dark);
+    const light = esc(o.light === undefined || o.light === null ? '#f6f1e6ff' : o.light);
+    const n = q.size + margin * 2;
+    let d = '';
+    for (let y = 0; y < q.size; y++) {
+      for (let x = 0; x < q.size;) {
+        if (q.modules[y][x]) {
+          let w = 1;
+          while (x + w < q.size && q.modules[y][x + w]) w++;
+          d += 'M' + (margin + x) + ' ' + (margin + y) + 'h' + w + 'v1h' + (-w) + 'z';
+          x += w;
+        } else x++;
+      }
+    }
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="' + (n * cell) + '" height="' + (n * cell) +
+      '" viewBox="0 0 ' + n + ' ' + n + '" shape-rendering="crispEdges">' +
+      (o.title ? '<title>' + esc(o.title) + '</title>' : '') +
+      '<rect width="' + n + '" height="' + n + '" fill="' + light + '"/>' +
+      '<path fill="' + dark + '" d="' + d + '"/></svg>';
+  };
+})();
+
+  </script>
+  <script>
+/* ——— poster.js ——— */
+/* 通关海报：把这一生的账画成 1 张能存进相册的图（1242×1656，朋友圈与小红书都吃这个比例）。
+ * 分工照全书的老规矩：数据 1 个都不在这儿编——MR.endcardData 只从引擎要（endings / summary /
+ * achList / state），MR.drawEndcard 只负责把要来的字摆到画布上。所以拼装能在 node 里测，画才需要浏览器。
+ * 二维码用 src/qr.js（本仓自带，不联网、不装包）。
+ */
+(function () {
+  const MR = globalThis.MR || (globalThis.MR = {});
+  const W = 1242, H = 1656;
+  const C = {
+    paper: '#f6f1e6', page: '#fdfaf2', ink: '#22201c', ink2: '#4d463c', mute: '#8a8070',
+    line: '#ddd2bd', rule: '#e9dfc8', red: '#a63a2b', grass: '#3e6b47', night: '#17190f', cream: '#f3efe2'
+  };
+  const SERIF = '"Songti SC", "STSong", "SimSun", "Source Han Serif SC", serif';
+  const SANS = '"Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif';
+  const MONO = 'ui-monospace, Menlo, Consolas, monospace';
+
+  // ---------- 数据：只搬引擎给的，缺的一律用「—」 ----------
+  MR.endcardData = function (game, opt) {
+    opt = opt || {};
+    const s = game.state, E = game.endings() || {}, sum = MR.summary(s) || {};
+    const m = E.metrics || sum || {};
+    const tk = m.talk || {};
+    const L = MR.achList ? MR.achList(s) : [];
+    const got = L.filter(function (a) { return a.got; }).length;
+    const f = s.flags || [], n = s.notes || {};
+    const ed = (MR.EDITIONS && MR.EDITIONS[s.edition]) || { name: '平装本' };
+    const v = function (x, unit) { return (x == null || x === '') ? '—' : (x + (unit || '')); };
+    const groups = [
+      { name: '这 1 生', rows: [
+        ['出场', v(m.apps, ' 场')], ['进球', v(m.goals, ' 个')], ['赛季', v(m.seasons, ' 个')],
+        ['退役', m.retired != null ? m.retired + ' 年' : '还在踢']] },
+      { name: '钱', rows: [
+        ['账面', v(m.money, ' 万')], ['场边身份', v(m.sideCash, ' 万')], ['欠', v(m.debt, ' 万')],
+        ['还过', v(s.debtPaid, ' 万')]] },
+      { name: '笔', rows: [
+        ['成章', s.chapters.length + ' 章'], ['已交事实', v(m.real + m.spin + m.omit, ' 条')],
+        ['如实 / 美化', m.real + ' / ' + m.spin], ['不提 · 留白', m.omit + ' · ' + m.blanked]] },
+      { name: '话', rows: [
+        ['说了', v(tk.turns, ' 句')], ['问出', v(tk.dug, ' 件')], ['被拦', v(tk.blocked, ' 次')],
+        ['被降级', v(tk.downgraded, ' 次')]] },
+      { name: '人', rows: [
+        ['平均信任', v(Math.round(m.relation || 0))], ['编辑信任', v(m.editorial)],
+        ['许可', v(m.perms, ' 份')], ['身份', (m.roles || []).join(' ') || '—']] },
+      { name: '命', rows: [
+        ['种子', v(s.seed)], ['篇幅', ed.name], ['成就', got + ' / ' + L.length],
+        ['支线', (f.indexOf('prodigy') >= 0 ? '天赋 ' : '') + (f.indexOf('legacy') >= 0 ? 'GOAT ' : '') + (n.lgN ? '（榜 ' + n.lgN + '/3）' : '') || '没开线']] },
+    ];
+    const d = new Date();
+    return {
+      title: '足球之路', eyebrow: '这 1 生写完了', ending: E.title || '—', lead: E.body || '',
+      groups: groups, seed: s.seed, edition: ed.name, chapters: s.chapters.length,
+      opens: opt.opens || '', date: d.getFullYear() + ' 年 ' + (d.getMonth() + 1) + ' 月 ' + d.getDate() + ' 日',
+      site: opt.site || '', credit: opt.credit || '出自 Rainbox AI 白川',
+      foot: '以上每个数都来自这 1 局的账：引擎只管裁决，笔在你手里。',
+    };
+  };
+
+  // ---------- 画 ----------
+  function wrap(x, text, maxW) {
+    const out = []; let line = '';
+    const chars = Array.from(String(text));
+    for (let i = 0; i < chars.length; i++) {
+      const t = line + chars[i];
+      if (line && x.measureText(t).width > maxW) { out.push(line); line = chars[i]; } else line = t;
+    }
+    if (line) out.push(line);
+    return out;
+  }
+
+  MR.drawEndcard = function (canvas, d) {
+    if (!canvas || typeof canvas.getContext !== 'function') return { ok: false, why: '这台没有 canvas' };
+    const x = canvas.getContext('2d');
+    if (!x) return { ok: false, why: 'canvas 给不出 2d 上下文' };
+    canvas.width = W; canvas.height = H;
+    x.fillStyle = C.paper; x.fillRect(0, 0, W, H);
+    x.strokeStyle = C.rule; x.lineWidth = 1;
+    for (let y = 34; y < H; y += 34) { x.beginPath(); x.moveTo(0, y + .5); x.lineTo(W, y + .5); x.stroke(); }
+    x.strokeStyle = C.red; x.globalAlpha = .5; x.beginPath(); x.moveTo(52.5, 0); x.lineTo(52.5, H); x.stroke(); x.globalAlpha = 1;
+
+    const pad = 84;
+    // 页眉：红印 + 名 + 署名
+    x.fillStyle = C.red; x.fillRect(pad, 60, 52, 52);
+    x.fillStyle = C.page; x.font = '28px ' + SERIF; x.textBaseline = 'alphabetic';
+    x.fillText('路', pad + 12, 60 + 37);
+    x.fillStyle = C.ink; x.font = '700 27px ' + SANS; x.fillText(d.title, pad + 70, 60 + 24);
+    x.fillStyle = C.mute; x.font = '15px ' + SANS;
+    x.fillText('1988 → 2026 · 一本自己写的回忆录', pad + 70, 60 + 47);
+    x.fillStyle = C.ink2; x.font = '15px ' + SANS;
+    const cr = wrap(x, d.credit, 320);
+    cr.forEach(function (t, i) { x.fillText(t, W - pad - x.measureText(t).width, 82 + i * 22); });
+    x.strokeStyle = C.ink; x.lineWidth = 2;
+    x.beginPath(); x.moveTo(pad, 140.5); x.lineTo(W - pad, 140.5); x.stroke();
+
+    // 结局名 + 那句结尾
+    x.fillStyle = C.mute; x.font = '16px ' + SANS; x.fillText(d.eyebrow, pad, 190);
+    x.fillStyle = C.ink; x.font = '72px ' + SERIF;
+    const et = wrap(x, String(d.ending), W - pad * 2);
+    et.slice(0, 2).forEach(function (t, i) { x.fillText(t, pad, 272 + i * 84); });
+    x.fillStyle = C.ink2; x.font = '22px ' + SERIF;
+    const ld = wrap(x, String(d.lead).replace(/\s+/g, ''), W - pad * 2);
+    ld.slice(0, 3).forEach(function (t, i) { x.fillText(t, pad, 300 + et.length * 60 + i * 34); });
+
+    // 6 组数：两列 × 3 行
+    const colW = (W - pad * 2 - 40) / 2, gy = 470, gh = 210;
+    d.groups.forEach(function (g, i) {
+      const cx = pad + (i % 2) * (colW + 40), cy = gy + Math.floor(i / 2) * gh;
+      x.fillStyle = C.page; x.fillRect(cx, cy, colW, gh - 22);
+      x.strokeStyle = C.line; x.lineWidth = 1; x.strokeRect(cx + .5, cy + .5, colW - 1, gh - 23);
+      x.fillStyle = C.red; x.fillRect(cx, cy, colW, 4);
+      x.fillStyle = C.ink; x.font = '700 21px ' + SANS; x.fillText(g.name, cx + 20, cy + 44);
+      g.rows.forEach(function (r, j) {
+        const ly = cy + 78 + j * 32;
+        x.fillStyle = C.mute; x.font = '16px ' + SANS; x.fillText(r[0], cx + 20, ly);
+        x.fillStyle = C.ink; x.font = '18px ' + SANS;
+        const t = wrap(x, String(r[1]), colW - 40 - x.measureText(r[0]).width - 12);
+        t.slice(0, 1).forEach(function (s2) { x.fillText(s2, cx + colW - 20 - x.measureText(s2).width, ly); });
+      });
+    });
+
+    // 夜场那块：码 + 话
+    const by = 1170, bh = 396;
+    x.fillStyle = C.night; x.fillRect(pad - 14, by, W - (pad - 14) * 2, bh);
+    const qs = MR.qrMatrix ? MR.qrMatrix(d.site || 'https://baichuan90.github.io/cola-pages/football-path/', { ecl: 'M' }) : null;
+    const box = 300, qx = pad + 8, qy = by + (bh - box) / 2;
+    x.fillStyle = C.page; x.fillRect(qx, qy, box, box);
+    if (qs) {
+      const n = qs.size, cell = Math.floor((box - 40) / (n + 8)), off = Math.floor((box - cell * n) / 2);
+      x.fillStyle = C.ink;
+      for (let yy = 0; yy < n; yy++) for (let xx = 0; xx < n; xx++) if (qs.modules[yy][xx]) x.fillRect(qx + off + xx * cell, qy + off + yy * cell, cell, cell);
+    }
+    const tx = qx + box + 44;
+    x.fillStyle = C.cream; x.font = '700 42px ' + SANS; x.fillText('扫这个码，写你自己那 1 本', tx, by + 92);
+    x.fillStyle = '#d8d2c0'; x.font = '20px ' + SANS;
+    wrap(x, '手机浏览器打开就能玩：100 点自己分，25 个节点，写到退役那天自己导出。不装 App、不收钱。', W - pad - tx - 24)
+      .slice(0, 3).forEach(function (t, i) { x.fillText(t, tx, by + 138 + i * 32); });
+    x.fillStyle = '#f0c98a'; x.font = '20px ' + MONO;
+    x.fillText(String(d.site || '').replace(/^https?:\/\//, ''), tx, by + 250);
+    x.fillStyle = '#9a9384'; x.font = '17px ' + SANS;
+    const meta = (d.opens ? d.opens + ' · ' : '') + '生成于 ' + d.date + ' · 第 ' + d.seed + ' 号命';
+    x.fillText(meta, tx, by + 288);
+
+    // 页脚
+    x.fillStyle = C.mute; x.font = '16px ' + SANS;
+    const ft = wrap(x, d.foot + '  ' + d.credit + ' · ' + d.chapters + ' 章', W - pad * 2);
+    ft.slice(0, 2).forEach(function (t, i) { x.fillText(t, pad, by + bh + 48 + i * 26); });
+    return { ok: true, w: W, h: H, groups: d.groups.length };
+  };
+
+  // dataURL → File：封闭版不许有 fetch，所以自己拆 base64
+  MR.posterFile = function (dataURL, name) {
+    try {
+      const b64 = String(dataURL).split(',')[1] || '';
+      const bin = atob(b64);
+      const u8 = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+      return new File([u8], name, { type: 'image/png' });
+    } catch (e) { return null; }
+  };
+})();
+
+  </script>
+  <script>
 /* ——— export.js ——— */
 /* 成书导出：把 assembleBook 那份 Markdown 变成能带走的书。
  * 三样：EPUB（自带 ZIP 打包，见 zip.js）、可打印的 HTML（浏览器里「打印 → 另存为 PDF」）、
@@ -6168,11 +6811,36 @@ a.tiny { text-decoration: none; }
   const esc = (t) => String(t == null ? '' : t).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
   let game = null;
   const SAVE = 'mrz-save-v2';
-  const view = { tab: 'toc', book: false, tv: { mine: null, shelf: null, busy: false }, tvAi: false };
+  const view = { tab: 'toc', book: false, tv: { mine: null, shelf: null, busy: false }, tvAi: false, poster: null, posterName: '', posterText: '' };
 
   MR.cfg = MR.cfg || { mode: 'template', baseUrl: '', model: 'gpt-4o-mini', key: '', temperature: .7, stripMarks: true, proxy: false };
 
+  // 打开次数：这 1 版没有服务器可问，所以只数这台设备。1 次加载 = 1 次打开（刷新也认）。
+  // 它不进玩法、不进分数、不进成书：只是 1 个诚实的本地计数，拿它吹「全网 N 人玩过」就是假话。
+  const OPENS = 'mrz-opens';
+  let opens = null;
+  function bumpOpens() {
+    try {
+      const o = JSON.parse(localStorage.getItem(OPENS) || 'null') || { n: 0, first: 0, last: 0 };
+      o.n += 1; o.last = Date.now(); if (!o.first) o.first = o.last;
+      localStorage.setItem(OPENS, JSON.stringify(o));
+      opens = o;
+    } catch (e) { opens = null; }
+    return opens;
+  }
+  const dstr = (t) => { const d = new Date(t); return (d.getMonth() + 1) + ' 月 ' + d.getDate() + ' 日'; };
+  const opensText = () => opens ? '本机第 ' + opens.n + ' 次打开' : '';
+  function paintOpens() {
+    const el = $('#opens');
+    if (!el) return;
+    const t = opensText();
+    el.textContent = t;
+    el.hidden = !t;
+    if (t) el.title = '这台设备共打开 ' + opens.n + ' 次，第 1 次在 ' + dstr(opens.first) + (opens.n > 1 ? '，最近 1 次在 ' + dstr(opens.last) : '');
+  }
+
   function boot() {
+    bumpOpens();
     const raw = load();
     if (raw) {
       try {
@@ -6190,6 +6858,7 @@ a.tiny { text-decoration: none; }
       setTimeout(() => { try { t.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (_) { } }, 260);
     });
     render();
+    paintOpens();
     // 账号：能连上就上线，连不上就当地下工作者（玩法不受影响；只有存档要注册）
     if (MR.acctInit) MR.acctInit().then(async (r) => {
       render();
@@ -6264,10 +6933,12 @@ a.tiny { text-decoration: none; }
     try {
       MR.appState = game.state;                     // 侧栏“打字测试/正文校验”面板读这个
       $('#hud').innerHTML = hudHtml();
-      $('#stage').innerHTML = view.book ? stageBook() : ({ roll: stageRoll, talk: stageTalk, decide: stageDecide, chapter: stageChapter, review: stageReview, present: stagePresent, end: stageEnd })[game.state.phase]();
+      const stg = $('#stage');
+      stg.innerHTML = view.book ? stageBook() : ({ roll: stageRoll, talk: stageTalk, decide: stageDecide, chapter: stageChapter, review: stageReview, present: stagePresent, end: stageEnd })[game.state.phase]();
+      if (view.poster) stg.insertAdjacentHTML('beforeend', posterMask());
       $('#side').innerHTML = sideHtml();
       const dk = $('#d-save');
-      if (dk) { const can = MR.closed || (MR.acct && MR.acct.canSave && MR.acct.canSave()); dk.textContent = MR.closed ? '存档' : (can ? '存档' : '建档'); dk.title = can ? '存本机（注册过就同步于端）' : '存档要先建个档：不收钱'; }
+      if (dk) { const can = MR.closed || (MR.acct && MR.acct.canSave && MR.acct.canSave()); dk.textContent = MR.closed ? '存档' : (can ? '存档' : '建档'); dk.title = MR.closed ? '存本机' : (can ? '存本机（注册过就同步于端）' : '存档要先建个档：不收钱'); }
       wire();
       window.__renderErr = null;
     } catch (e) {
@@ -6362,7 +7033,7 @@ a.tiny { text-decoration: none; }
 <p class="mut">这 5 个数不由天定：<b>${lim.total} 点你自己分</b>，单项上限 ${lim.max} 点（到顶就 20 级）。分完就是这辈子的天花板，开局以后不能改——跟掷出来的一样算。</p>
 <div class="ptbar ${left === 0 ? 'ok' : 'no'}"><b>${chk.used || 0}</b><i>/ ${lim.total} 点</i><em>${left === 0 ? '分完了' : left > 0 ? '还剩 ' + left + ' 点' : '超出 ' + (-left) + ' 点'}</em></div>
 <div class="pts">${lim.keys.map(row).join('')}</div>
-${locked ? '<p class="warn">这 5 个数已经定了：本局不能重分。</p>' : `<p class="btnrow tight"><button class="tiny" id="a-flat">均分</button><button class="tiny" id="a-rand">让运气替我分</button><button class="tiny" id="a-clear">清回 0</button></p><p class="mut">「让运气替我分」只改这 5 个数怎么落，不改命：每年的骰子按「种子 + 年份」派生，多扔 1 次不会把你这 1 生挪开 1 格（想换命就重新开 1 局）。</p>`}
+${locked ? '<p class="warn">这 5 个数已经定了：本局不能重分。</p>' : `<p class="btnrow tight"><button class="tiny" id="a-flat">均分</button><button class="tiny" id="a-rand">让运气替我分</button><button class="tiny" id="a-clear">清回 0</button></p><p class="mut">「让运气替我分」只改这 5 个数怎么落，不改命：骰子按「种子 + 年份」派生（想换命就重开 1 局）。</p>`}
 <p class="lead">这么分我是：<b>${esc(style.name)}</b>——${esc(style.note || '')}</p>
 <p class="mut">体校评级：<b>${esc((pv && pv.rarity) || a.rarity)}</b>。${a.glass >= 1.5 ? '膝盖比常人脆（伤×1.75）。' : a.glass <= .85 ? '身体耐用。' : '膝盖正常。'}</p>
 ${pv && pv.risky.length ? '<p class="warn">短板警告：' + pv.risky.join('、') + ' 只给了 0-4 点。那 1 项不会自己长回来——它会在 20 岁前后具体输 1 次给我看。</p>' : ''}
@@ -6522,6 +7193,29 @@ ${rev.length && s().dayLeft > 0 ? `<details class="rvbox"><summary>← 先不往
     copy(url + ' ' + text);
     toast('链接连同这句话抄好了，粘给谁都行');
   }
+
+  // ---------------- 通关海报：把这一生的账画成 1 张图，能存进相册 ----------------
+  // 码指的始终是这 1 页：http(s) 下就用当前地址，file:// 下用上线那 1 个地址（本机文件别人扫不到）
+  const HOME = 'https://baichuan90.github.io/cola-pages/football-path/';
+  const posterSite = () => shareable() ? location.href.split('#')[0] : HOME;
+  function makePoster() {
+    try {
+      const c = document.createElement('canvas');
+      const data = MR.endcardData(game, { opens: opensText(), site: posterSite() });
+      const r = MR.drawEndcard(c, data);
+      if (!r || !r.ok) { toast('这台浏览器画不出来：' + ((r && r.why) || '没有 canvas')); return; }
+      view.poster = c.toDataURL('image/png');
+      view.posterName = '足球之路-' + game.state.seed + '.png';
+      view.posterText = '我把这 1 生写完了：' + data.chapters + ' 章，种子 ' + data.seed + '。扫这里的码，写你自己那 1 本。';
+      render();
+    } catch (e) { toast('海报画崩了：' + ((e && e.message) || e)); }
+  }
+  function posterMask() {
+    return `<div class="pmask" role="dialog" aria-label="通关海报">
+<div class="pv"><img src="${view.poster}" alt="通关海报"></div>
+<div class="pb"><button class="big" id="poster-save">保存这张图</button><button id="poster-share">发给朋友</button><button id="poster-close">关掉</button></div>
+<p class="ph">手机上长按这张图 →「保存图片到相册」；电脑上右键另存。图里那个码就指向这 1 页。</p></div>`;
+  }
   function stageEnd() {
     const e = game.endings(), m = e.metrics;
     return `<div class="card"><h2>${esc(e.title)}</h2>
@@ -6532,14 +7226,14 @@ ${rev.length && s().dayLeft > 0 ? `<details class="rvbox"><summary>← 先不往
 <tr><th>钱</th><td>账面 ${m.money} 万，场边身份 ${m.sideCash} 万，欠 ${m.debt} 万</td></tr>
 <tr><th>谈话</th><td>说了 ${m.talk.turns} 句，问出 ${m.talk.dug} 件事，被拦 ${m.talk.blocked} 次，翻脸 ${m.talk.angry} 次，宣称结果被降级 ${m.talk.downgraded} 次</td></tr>
 <tr><th>关系</th><td>平均信任 ${m.relation}，编辑信任 ${m.editorial}，许可 ${m.perms} 份</td></tr></table>
-<p class="btnrow"><button class="big" id="showbook">读整本 →</button><button id="again">重开 1 段人生</button>${shareBtn()}</p>${regCard()}</div>`;
+<p class="btnrow"><button class="big" id="showbook">读整本 →</button><button id="btn-poster">生成海报</button><button id="again">重开 1 段人生</button>${shareBtn()}</p>${regCard()}</div>`;
   }
   function stageBook() {
     const full = game.book();
     return `<div class="card"><h2>《足球之路》 · ${game.state.chapters.length} 章</h2>
 <div class="btnrow"><button class="big" id="export-epub">导出 EPUB</button><button id="print-pdf">打印 / 存 PDF</button><button id="export-html">下 HTML</button>${MR.closed ? '' : '<button id="tv-open">交给电视台</button>'}</div>
-<div class="btnrow"><button id="export-md">导出 Markdown</button><button id="btn-copy">复制全文</button>${shareBtn()}<button id="toggle-marks">${MR.cfg.stripMarks ? '显示引用标记' : '隐藏引用标记'}</button><button id="backend">回结算</button></div>
-<p class="mut">导出都在你这台机器上算，不经过服务器。EPUB 能直接进 Apple Books / KOBO / Calibre；PDF 走打印那 1 页（目标选「另存为 PDF」）。</p>
+<div class="btnrow"><button id="export-md">导出 Markdown</button><button id="btn-copy">复制全文</button><button id="btn-poster">生成海报</button>${shareBtn()}<button id="toggle-marks">${MR.cfg.stripMarks ? '显示引用标记' : '隐藏引用标记'}</button><button id="backend">回结算</button></div>
+<p class="mut">导出都在这台机器上算。EPUB 进 Apple Books / KOBO / Calibre；PDF 走打印那 1 页（目标选「另存为 PDF」）。</p>
 <div class="book">${esc(full)}</div>${MR.closed ? '' : regCard()}</div>`;
   }
 
@@ -6745,8 +7439,8 @@ ${!online ? `<label>给自己起个名（≥ 2 字）<input id="rg-name" placeho
 
   function sideHtml() {
     const tabs = [['toc', '年表'], ['people', '人'], ['era', '同时代'], ['src', '借了什么'], ['ledger', '账本'], ['ach', '成就'], ['type', '打字测试'], ['acct', '账户'], ['tv', '电视台'], ['cfg', '设置']]
-      // 封闭版没有服务器，所以也没有「账户」与「电视台」这两张脸：不是锁起来，是这 1 版里没有这两样东西
-      .filter((t) => !MR.closed || (t[0] !== 'acct' && t[0] !== 'tv'));
+      // 封闭版没有服务器，所以没有「账户」与「电视台」这两张脸；「打字测试」是护栏工作台，也不给玩家摆
+      .filter((t) => !MR.closed || (t[0] !== 'acct' && t[0] !== 'tv' && t[0] !== 'type'));
     const body = { toc: tabToc, people: tabPeople, era: tabEra, src: tabSrc, ledger: tabLedger, ach: tabAch, type: tabType, acct: tabAcct, tv: tabTv, cfg: tabCfg }[view.tab]();
     return `<div class="sheethead"><b>随行档案</b><button id="sheet-close" class="sheetx" aria-label="收起面板">收起×</button></div><div class="tabs">${tabs.map((t) => `<button data-tab="${t[0]}" class="${view.tab === t[0] ? 'on' : ''}">${t[1]}</button>`).join('')}</div><div id="tabbody">${body}</div>`;
   }
@@ -6778,7 +7472,8 @@ ${rel != null ? `<i class="mut"> · 关系 ${rel}${s.known[p.id] ? ' · 我知�
     const cl = (s.seasons || []).find((r) => r.cleared);
     const debtLine = dp > 0 ? `<p class="mut">债：累计还了 ${dp} 万${cl ? '，' + cl.year + ' 年还清' : '，还欠 ' + s.debt + ' 万'}。</p>` : '';
     const rows = s.facts.map((f) => `<tr class="${f.stance === 'omit' || f.stance === 'blank' ? 'om' : ''}"><td>${f.id}</td><td>${f.year || ''}</td><td>${esc(f.kind)}</td><td>${esc(f.t)}</td><td>${typeof f.usedIn === 'number' ? '第' + f.usedIn + '章' : f.usedIn === 'gap' ? '空' : '未写'}</td></tr>`).join('');
-    return `${debtLine}<table class="led"><tr><th>id</th><th>年</th><th>类</th><th>事实</th><th>去向</th></tr>${rows}</table>`;
+    return `${debtLine}<table class="led"><tr><th>id</th><th>年</th><th>类</th><th>事实</th><th>去向</th></tr>${rows}</table>
+<p class="btnrow"><button class="tiny" id="ledger-json">复制这份账本 JSON</button></p>`;
   }
   // ---------------- 成就（M5）：判据在引擎，这里只摆结果与证据 ----------------
   function tabAch() {
@@ -6786,7 +7481,7 @@ ${rel != null ? `<i class="mut"> · 关系 ${rel}${s.known[p.id] ? ' · 我知�
     const L = MR.achList ? MR.achList(s) : [];
     const got = L.filter((a) => a.got).length;
     const TC = { '铜': 'tb', '银': 'ts', '金': 'tg', '藏': 'th' };
-    return `<div class="achlist"><p class="mut">解开的 ${got} / ${L.length}。判据全在引擎里，读的是账上的硬数字；藏档没解开前连名字都不给看。</p>` +
+    return `<div class="achlist"><p class="mut">解开 ${got} / ${L.length}。判据在引擎，读的是账上硬数字；藏档没解开不给名字。</p>` +
       L.map((a) => `<div class="achi ${a.got ? '' : 'off'}"><b class="${TC[a.tier] || ''}">${a.got ? a.tier : '？'}</b><span>${a.got ? `<u>${esc(a.t)}</u><i class="mut">${esc(a.ev)}</i>` : `<u>${a.tier === '藏' ? '？？？' : esc(a.t)}</u><i class="mut">${a.tier === '藏' ? '——' : esc(a.d)}</i>`}</span></div>`).join('')
       + sidequestBlock() + '</div>';
   }
@@ -6803,7 +7498,7 @@ ${rel != null ? `<i class="mut"> · 关系 ${rel}${s.known[p.id] ? ' · 我知�
     const lg = on('legacy')
       ? `旗已挂；对比榜写了 ${lgN} / 3 张，退役前还会在书里留 1 节「历史地位」`
       : `30 岁起的结算点上查，三票里够 2 票就挂旗：进球 ${((s.career || {}).goals || 0)} / 200 · 联赛第 1 ${r1} 次 · 声望 ${Math.round(s.rep || 0)} / 65`;
-    return `<h4>两条支线</h4><p class="mut">不占章数、不添事件：它们只往账上写事实。下面是跑到哪 1 步，判据与行文都在引擎那边。</p>`
+    return `<h4>两条支线</h4><p class="mut">不占章数、不添事件，只往账上写事实。</p>`
       + row('天赋异禀', on('prodigy'), pd) + row('GOAT 历史', on('legacy'), lg);
   }
   function tabType() {
@@ -6882,12 +7577,12 @@ ${tvShelfRows()}
 
   function tabCfg() {
     const c = MR.cfg;
-    if (MR.closed) {                                 // 封闭版：这里不再摆任何「写手/key/网关」控件
+    if (MR.closed) {                                 // 封闭版：这页只留真用得上的两件事（存档与重开在底栅）
       return `<div class="cfg">
-<p class="mut">这 1 版是<b>封闭版</b>：写手只有离线模板那 1 个，没有远端模型、没有 key、没有服务端。全书 0 个网络请求——断网双击也能从 1988 写到 2026。</p>
 <label><input type="checkbox" id="cfg-strip" ${c.stripMarks ? 'checked' : ''}> 成品里隐藏 [F:] 标记</label>
-<div class="btnrow"><button id="btn-save">存本机</button><button id="btn-load">读回</button><button id="btn-wipe">清空存档</button></div>
-<p class="mut">存档只存在这台浏览器的 localStorage 里。换设备带不走：封闭版没有云端，也不向你收任何信息。</p></div>`;
+<p class="mut">${esc(opensText() || '这台设备第一次打开')} · 存档只存在这台浏览器里，换设备带不走。</p>
+<div class="btnrow"><button class="tiny danger" id="btn-wipe">清空本机存档</button></div>
+</div>`;
     }
   }
 
@@ -7081,6 +7776,7 @@ $$('[data-rv]').forEach((b) => b.addEventListener('click', () => {
     };
     on('btn-book', goBook);
     on('btn-json', exportLedger);
+    on('ledger-json', exportLedger);
     on('btn-reset', newLife);
     on1('d-save', save);
     on1('d-load', loadSave);
@@ -7093,6 +7789,23 @@ $$('[data-rv]').forEach((b) => b.addEventListener('click', () => {
     on('backend', () => { view.book = false; s().phase = 'end'; render(); });
     on('btn-copy', () => copy(game.book()));
     on('btn-share', () => { doShare(); });
+    on('btn-poster', makePoster);
+    on('poster-close', () => { view.poster = null; render(); });
+    on('poster-save', () => {
+      if (!view.poster) return;
+      const a = document.createElement('a');
+      a.href = view.poster; a.download = view.posterName || 'football-path.png';
+      document.body.appendChild(a); a.click(); a.remove();
+      toast('图存下好了（也可能落在下载栏里）');
+    });
+    on('poster-share', async () => {
+      const f = MR.posterFile ? MR.posterFile(view.poster, view.posterName || 'poster.png') : null;
+      if (!f || !navigator.share || !(navigator.canShare && navigator.canShare({ files: [f] }))) { toast('这台不认图片分享：长按那张图保存就行'); return; }
+      try {
+        await Promise.race([navigator.share({ title: '足球之路', text: view.posterText || '', files: [f] }), new Promise((_, rej) => setTimeout(() => rej(new Error('share 没应答')), 4000))]);
+        toast('发出去了');
+      } catch (e) { toast(e && e.name === 'AbortError' ? '取消了，没发' : '没发出去：长按那张图保存也行'); }
+    });
     on('export-epub', doEpub);
     on('tv-open', () => { view.tab = 'tv'; openSheet(); render(); loadTv(true); });
     on('tv-retry', () => MR.acctInit().then((r) => { toast(r && r.offline ? '还是连不上' : '接上了'); render(); if (!(r && r.offline)) loadTv(true); }));
